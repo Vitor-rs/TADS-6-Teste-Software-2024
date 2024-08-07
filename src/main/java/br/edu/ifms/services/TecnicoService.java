@@ -79,6 +79,11 @@ public class TecnicoService {
 			throw new ResourceNotFoundException("O recurso com o ID = "+id+" não foi localizado");
 		} catch (DataIntegrityViolationException e) {
 			throw new DataBaseException("Não é possível excluir o registro, pois o mesmo está em uso");
-		}
+		}		
 	}
 }
+
+
+
+
+

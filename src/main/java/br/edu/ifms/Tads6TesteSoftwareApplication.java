@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
-@EnableWebMvc
+//@EnableWebMvc
 public class Tads6TesteSoftwareApplication implements WebMvcConfigurer {
 	
 	@Override
