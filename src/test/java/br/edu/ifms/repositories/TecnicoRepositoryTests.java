@@ -41,8 +41,7 @@ public class TecnicoRepositoryTests {
 	public void findByIdDeveriaRetornarObjetoVazioQuandoIdInexistir(){
 		Optional<Tecnico> resultado = repository.findById(idInexistente);
 		Assertions.assertTrue(resultado.isEmpty());
-	}
-	
+	}	
 	
 	//SAVE
 	@Test
