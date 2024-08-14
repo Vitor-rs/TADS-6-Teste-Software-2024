@@ -1,65 +1,65 @@
 package br.edu.ifms.dto;
 
-import java.io.Serializable;
-
 import br.edu.ifms.entities.Equipamento;
 import br.edu.ifms.entities.Setor;
 
+import java.io.Serializable;
+
 public class EquipamentoDTO implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
-	private Long id;
-	private String equipamento;
-	private String patrimonio;
-	private Setor setor;
+    private static final long serialVersionUID = 1L;
 
-	public EquipamentoDTO() {
-		// TODO Auto-generated constructor stub
-	}
+    private Long id;
+    private String equipamento;
+    private String patrimonio;
+    private Setor setor;
 
-	public EquipamentoDTO(Long id, String equipamento, String patrimonio, Setor setor) {
-		this.id = id;
-		this.equipamento = equipamento;
-		this.patrimonio = patrimonio;
-		this.setor = setor;
-	}
-	
-	public EquipamentoDTO(Equipamento entity) {
-		this.id = entity.getId();
-		this.equipamento = entity.getEquipamento();
-		this.patrimonio = entity.getPatrimonio();
-		this.setor = entity.getSetor();
-	}
+    public EquipamentoDTO() {
+        // TODO Auto-generated constructor stub
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public EquipamentoDTO(Long id, String equipamento, String patrimonio, Setor setor) {
+        this.id = id;
+        this.equipamento = equipamento;
+        this.patrimonio = patrimonio;
+        this.setor = setor;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public EquipamentoDTO(Equipamento entity) {
+        this.id = entity.getId();
+        this.equipamento = entity.getEquipamento();
+        this.patrimonio = entity.getPatrimonio();
+        this.setor = entity.getSetor();
+    }
 
-	public String getEquipamento() {
-		return equipamento;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setEquipamento(String equipamento) {
-		this.equipamento = equipamento;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getPatrimonio() {
-		return patrimonio;
-	}
+    public String getEquipamento() {
+        return equipamento;
+    }
 
-	public void setPatrimonio(String patrimonio) {
-		this.patrimonio = patrimonio;
-	}
+    public void setEquipamento(String equipamento) {
+        this.equipamento = equipamento;
+    }
 
-	public Setor getSetor() {
-		return setor;
-	}
+    public String getPatrimonio() {
+        return patrimonio;
+    }
 
-	public void setSetor(Setor setor) {
-		this.setor = setor;
-	}
+    public void setPatrimonio(String patrimonio) {
+        this.patrimonio = patrimonio;
+    }
+
+    public Setor getSetor() {
+        return setor;
+    }
+
+    public void setSetor(Setor setor) {
+        this.setor = setor;
+    }
 }

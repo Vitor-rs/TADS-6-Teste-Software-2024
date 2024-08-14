@@ -4,56 +4,56 @@ import java.io.Serializable;
 import java.time.Instant;
 
 public class StandartError implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
-	private Instant timestamp;
-	private Integer status;
-	private String error;
-	private String path;
-	private String message;
-	
-	public StandartError() {
-		// TODO Auto-generated constructor stub
-	}
+    private static final long serialVersionUID = 1L;
 
-	public Instant getTimestamp() {
-		return timestamp;
-	}
+    private Instant timestamp;
+    private Integer status;
+    private String error;
+    private String path;
+    private String message;
 
-	public void setTimestamp(Instant timestamp) {
-		this.timestamp = timestamp;
-	}
+    public StandartError() {
+        // TODO Auto-generated constructor stub
+    }
 
-	public Integer getStatus() {
-		return status;
-	}
+    public Instant getTimestamp() {
+        return timestamp;
+    }
 
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
+    public void setTimestamp(Instant timestamp) {
+        this.timestamp = timestamp;
+    }
 
-	public String getError() {
-		return error;
-	}
+    public Integer getStatus() {
+        return status;
+    }
 
-	public void setError(String error) {
-		this.error = error;
-	}
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
-	public String getPath() {
-		return path;
-	}
+    public String getError() {
+        return error;
+    }
 
-	public void setPath(String path) {
-		this.path = path;
-	}
+    public void setError(String error) {
+        this.error = error;
+    }
 
-	public String getMessage() {
-		return message;
-	}
+    public String getPath() {
+        return path;
+    }
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
-	
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
 }

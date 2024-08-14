@@ -1,89 +1,83 @@
 package br.edu.ifms.entities;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_equipamento")
 public class Equipamento implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String equipamento;
-	private String patrimonio;
-	
-	@ManyToOne
-	@JoinColumn(name = "id_setor_fk")
-	private Setor setor;
-	
-	public Equipamento() {
-		// TODO Auto-generated constructor stub
-	}
+    private static final long serialVersionUID = 1L;
 
-	public Equipamento(Long id, String equipamento, String patrimonio, Setor setor) {
-		this.id = id;
-		this.equipamento = equipamento;
-		this.patrimonio = patrimonio;
-		this.setor = setor;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String equipamento;
+    private String patrimonio;
 
-	public Long getId() {
-		return id;
-	}
+    @ManyToOne
+    @JoinColumn(name = "id_setor_fk")
+    private Setor setor;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Equipamento() {
+        // TODO Auto-generated constructor stub
+    }
 
-	public String getEquipamento() {
-		return equipamento;
-	}
+    public Equipamento(Long id, String equipamento, String patrimonio, Setor setor) {
+        this.id = id;
+        this.equipamento = equipamento;
+        this.patrimonio = patrimonio;
+        this.setor = setor;
+    }
 
-	public void setEquipamento(String equipamento) {
-		this.equipamento = equipamento;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getPatrimonio() {
-		return patrimonio;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setPatrimonio(String patrimonio) {
-		this.patrimonio = patrimonio;
-	}
+    public String getEquipamento() {
+        return equipamento;
+    }
 
-	public Setor getSetor() {
-		return setor;
-	}
+    public void setEquipamento(String equipamento) {
+        this.equipamento = equipamento;
+    }
 
-	public void setSetor(Setor setor) {
-		this.setor = setor;
-	}
+    public String getPatrimonio() {
+        return patrimonio;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
+    public void setPatrimonio(String patrimonio) {
+        this.patrimonio = patrimonio;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Equipamento other = (Equipamento) obj;
-		return Objects.equals(id, other.id);
-	}
+    public Setor getSetor() {
+        return setor;
+    }
+
+    public void setSetor(Setor setor) {
+        this.setor = setor;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Equipamento other = (Equipamento) obj;
+        return Objects.equals(id, other.id);
+    }
 
 }
