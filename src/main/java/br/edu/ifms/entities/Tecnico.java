@@ -2,12 +2,14 @@ package br.edu.ifms.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "tb_tecnico")
 public class Tecnico implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
