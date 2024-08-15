@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EquipamentoService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TADS-6-Teste-Software</a> &gt; <a href="index.source.html" class="el_package">br.edu.ifms.services</a> &gt; <span class="el_source">EquipamentoService.java</span></div><h1>EquipamentoService.java</h1><pre class="source lang-java linenums">package br.edu.ifms.services;
+
+import br.edu.ifms.dto.EquipamentoDTO;
+import br.edu.ifms.entities.Equipamento;
+import br.edu.ifms.repositories.EquipamentoRepository;
+import br.edu.ifms.services.exceptions.DataBaseException;
+import br.edu.ifms.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+<span class="fc" id="L22">public class EquipamentoService {</span>
+
+    @Autowired
+    private EquipamentoRepository repository;
+
+    @Transactional(readOnly = true)
+    public List&lt;EquipamentoDTO&gt; findAll() {
+<span class="nc" id="L29">        List&lt;Equipamento&gt; list = repository.findAll();</span>
+<span class="nc" id="L30">        return list.stream().map(t -&gt; new EquipamentoDTO(t)).collect(Collectors.toList());</span>
+    }
+
+    @Transactional(readOnly = true)
+    public Page&lt;EquipamentoDTO&gt; findAllPaged(Pageable pageable) {
+<span class="nc" id="L35">        Page&lt;Equipamento&gt; list = repository.findAll(pageable);</span>
+<span class="nc" id="L36">        return list.map(x -&gt; new EquipamentoDTO(x));</span>
+    }
+
+    @Transactional(readOnly = true)
+    public EquipamentoDTO findById(Long id) {
+<span class="nc" id="L41">        Optional&lt;Equipamento&gt; obj = repository.findById(id);</span>
+<span class="nc" id="L42">        Equipamento entity = obj.orElseThrow(() -&gt; new ResourceNotFoundException(</span>
+                &quot;A entidade consultada não foi localizada&quot;));
+<span class="nc" id="L44">        return new EquipamentoDTO(entity);</span>
+    }
+
+    @Transactional
+    public EquipamentoDTO insert(EquipamentoDTO dto) {
+<span class="nc" id="L49">        Equipamento entity = new Equipamento();</span>
+<span class="nc" id="L50">        entity.setEquipamento(dto.getEquipamento());</span>
+<span class="nc" id="L51">        entity.setPatrimonio(dto.getPatrimonio());</span>
+<span class="nc" id="L52">        entity.setSetor(dto.getSetor());</span>
+<span class="nc" id="L53">        entity = repository.save(entity);</span>
+<span class="nc" id="L54">        return new EquipamentoDTO(entity);</span>
+    }
+
+    @Transactional
+    public EquipamentoDTO update(Long id, EquipamentoDTO dto) {
+        try {
+<span class="nc" id="L60">            Equipamento entity = repository.getReferenceById(id);</span>
+<span class="nc" id="L61">            entity.setEquipamento(dto.getEquipamento());</span>
+<span class="nc" id="L62">            entity.setPatrimonio(dto.getPatrimonio());</span>
+<span class="nc" id="L63">            entity.setSetor(dto.getSetor());</span>
+<span class="nc" id="L64">            entity = repository.save(entity);</span>
+<span class="nc" id="L65">            return new EquipamentoDTO(entity);</span>
+<span class="nc" id="L66">        } catch (EntityNotFoundException e) {</span>
+<span class="nc" id="L67">            throw new ResourceNotFoundException(&quot;O recurso com o ID = &quot; + id + &quot; não foi localizado&quot;);</span>
+        }
+    }
+
+    public void delete(Long id) {
+        try {
+<span class="nc" id="L73">            repository.deleteById(id);</span>
+<span class="nc" id="L74">        } catch (EmptyResultDataAccessException e) {</span>
+<span class="nc" id="L75">            throw new ResourceNotFoundException(&quot;O recurso com o ID = &quot; + id + &quot; não foi localizado&quot;);</span>
+<span class="nc" id="L76">        } catch (DataIntegrityViolationException e) {</span>
+<span class="nc" id="L77">            throw new DataBaseException(&quot;Não é possível excluir o registro, pois o mesmo está em uso&quot;);</span>
+<span class="nc" id="L78">        }</span>
+<span class="nc" id="L79">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

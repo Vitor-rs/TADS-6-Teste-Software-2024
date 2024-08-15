@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrdemDeServicoDTO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TADS-6-Teste-Software</a> &gt; <a href="index.source.html" class="el_package">br.edu.ifms.dto</a> &gt; <span class="el_source">OrdemDeServicoDTO.java</span></div><h1>OrdemDeServicoDTO.java</h1><pre class="source lang-java linenums">package br.edu.ifms.dto;
+
+import br.edu.ifms.entities.Equipamento;
+import br.edu.ifms.entities.OrdemDeServico;
+import br.edu.ifms.entities.Tecnico;
+import br.edu.ifms.entities.enums.Prioridade;
+import br.edu.ifms.entities.enums.Status;
+
+import java.io.Serializable;
+import java.sql.Date;
+
+public class OrdemDeServicoDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    private Long id;
+    private String descricaoProblema;
+    private String descricaoSolucao;
+    private Date dataCadastro;
+    private Status status;
+    private Prioridade prioridade;
+    private Tecnico tecnico;
+    private Equipamento equipamento;
+    //private List&lt;EquipamentoDTO&gt; equipamentos = new ArrayList&lt;&gt;();
+
+<span class="nc" id="L25">    public OrdemDeServicoDTO() {</span>
+        // TODO Auto-generated constructor stub
+<span class="nc" id="L27">    }</span>
+
+    public OrdemDeServicoDTO(Long id, String descricaoProblema, String descricaoSolucao, Date dataCadastro,
+<span class="nc" id="L30">                             Status status, Prioridade prioridade, Tecnico tecnico, Equipamento equipamento) {</span>
+<span class="nc" id="L31">        this.id = id;</span>
+<span class="nc" id="L32">        this.descricaoProblema = descricaoProblema;</span>
+<span class="nc" id="L33">        this.descricaoSolucao = descricaoSolucao;</span>
+<span class="nc" id="L34">        this.dataCadastro = dataCadastro;</span>
+<span class="nc" id="L35">        this.status = status;</span>
+<span class="nc" id="L36">        this.prioridade = prioridade;</span>
+<span class="nc" id="L37">        this.tecnico = tecnico;</span>
+<span class="nc" id="L38">        this.equipamento = equipamento;</span>
+<span class="nc" id="L39">    }</span>
+
+<span class="nc" id="L41">    public OrdemDeServicoDTO(OrdemDeServico entity) {</span>
+<span class="nc" id="L42">        this.id = entity.getId();</span>
+<span class="nc" id="L43">        this.descricaoProblema = entity.getDescricaoProblema();</span>
+<span class="nc" id="L44">        this.descricaoSolucao = entity.getDescricaoSolucao();</span>
+<span class="nc" id="L45">        this.dataCadastro = entity.getDataCadastro();</span>
+<span class="nc" id="L46">        this.status = entity.getStatus();</span>
+<span class="nc" id="L47">        this.prioridade = entity.getPrioridade();</span>
+<span class="nc" id="L48">        this.tecnico = entity.getTecnico();</span>
+<span class="nc" id="L49">        this.equipamento = entity.getEquipamento();</span>
+<span class="nc" id="L50">    }</span>
+	
+	/*public OrdemDeServicoDTO(OrdemDeServico entity, Set&lt;Equipamento&gt; equipamentos) {
+		this(entity);
+		equipamentos.forEach(equipamento -&gt; new EquipamentoDTO(equipamento));
+	}*/
+
+    public Long getId() {
+<span class="nc" id="L58">        return id;</span>
+    }
+
+    public void setId(Long id) {
+<span class="nc" id="L62">        this.id = id;</span>
+<span class="nc" id="L63">    }</span>
+
+    public String getDescricaoProblema() {
+<span class="nc" id="L66">        return descricaoProblema;</span>
+    }
+
+    public void setDescricaoProblema(String descricaoProblema) {
+<span class="nc" id="L70">        this.descricaoProblema = descricaoProblema;</span>
+<span class="nc" id="L71">    }</span>
+
+    public String getDescricaoSolucao() {
+<span class="nc" id="L74">        return descricaoSolucao;</span>
+    }
+
+    public void setDescricaoSolucao(String descricaoSolucao) {
+<span class="nc" id="L78">        this.descricaoSolucao = descricaoSolucao;</span>
+<span class="nc" id="L79">    }</span>
+
+    public Date getDataCadastro() {
+<span class="nc" id="L82">        return dataCadastro;</span>
+    }
+
+    public void setDataCadastro(Date dataCadastro) {
+<span class="nc" id="L86">        this.dataCadastro = dataCadastro;</span>
+<span class="nc" id="L87">    }</span>
+
+    public Status getStatus() {
+<span class="nc" id="L90">        return status;</span>
+    }
+
+    public void setStatus(Status status) {
+<span class="nc" id="L94">        this.status = status;</span>
+<span class="nc" id="L95">    }</span>
+
+    public Prioridade getPrioridade() {
+<span class="nc" id="L98">        return prioridade;</span>
+    }
+
+    public void setPrioridade(Prioridade prioridade) {
+<span class="nc" id="L102">        this.prioridade = prioridade;</span>
+<span class="nc" id="L103">    }</span>
+
+    public Tecnico getTecnico() {
+<span class="nc" id="L106">        return tecnico;</span>
+    }
+
+    public void setTecnico(Tecnico tecnico) {
+<span class="nc" id="L110">        this.tecnico = tecnico;</span>
+<span class="nc" id="L111">    }</span>
+
+    public Equipamento getEquipamento() {
+<span class="nc" id="L114">        return equipamento;</span>
+    }
+
+    public void setEquipamento(Equipamento equipamento) {
+<span class="nc" id="L118">        this.equipamento = equipamento;</span>
+<span class="nc" id="L119">    }</span>
+
+	/*public List&lt;EquipamentoDTO&gt; getEquipamentos() {
+		return equipamentos;
+	}*/
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

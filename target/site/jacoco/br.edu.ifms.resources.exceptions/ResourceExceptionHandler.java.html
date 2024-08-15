@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ResourceExceptionHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TADS-6-Teste-Software</a> &gt; <a href="index.source.html" class="el_package">br.edu.ifms.resources.exceptions</a> &gt; <span class="el_source">ResourceExceptionHandler.java</span></div><h1>ResourceExceptionHandler.java</h1><pre class="source lang-java linenums">package br.edu.ifms.resources.exceptions;
+
+import br.edu.ifms.services.exceptions.DataBaseException;
+import br.edu.ifms.services.exceptions.ResourceNotFoundException;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import java.time.Instant;
+
+@ControllerAdvice
+<span class="fc" id="L14">public class ResourceExceptionHandler {</span>
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity&lt;StandartError&gt; entityNotFound(
+            ResourceNotFoundException e, HttpServletRequest request) {
+
+<span class="fc" id="L20">        HttpStatus status = HttpStatus.NOT_FOUND;</span>
+
+<span class="fc" id="L22">        StandartError error = new StandartError();</span>
+<span class="fc" id="L23">        error.setTimestamp(Instant.now());</span>
+<span class="fc" id="L24">        error.setStatus(status.value());</span>
+<span class="fc" id="L25">        error.setError(&quot;Recurso não encontrado&quot;);</span>
+<span class="fc" id="L26">        error.setMessage(e.getMessage());</span>
+<span class="fc" id="L27">        error.setPath(request.getRequestURI());</span>
+
+<span class="fc" id="L29">        return ResponseEntity.status(status).body(error);</span>
+    }
+
+    @ExceptionHandler(DataBaseException.class)
+    public ResponseEntity&lt;StandartError&gt; database(
+            DataBaseException e, HttpServletRequest request) {
+
+<span class="nc" id="L36">        HttpStatus status = HttpStatus.BAD_REQUEST;</span>
+
+<span class="nc" id="L38">        StandartError error = new StandartError();</span>
+<span class="nc" id="L39">        error.setTimestamp(Instant.now());</span>
+<span class="nc" id="L40">        error.setStatus(status.value());</span>
+<span class="nc" id="L41">        error.setError(&quot;Database exception&quot;);</span>
+<span class="nc" id="L42">        error.setMessage(e.getMessage());</span>
+<span class="nc" id="L43">        error.setPath(request.getRequestURI());</span>
+
+<span class="nc" id="L45">        return ResponseEntity.status(status).body(error);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StandartError.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TADS-6-Teste-Software</a> &gt; <a href="index.source.html" class="el_package">br.edu.ifms.resources.exceptions</a> &gt; <span class="el_source">StandartError.java</span></div><h1>StandartError.java</h1><pre class="source lang-java linenums">package br.edu.ifms.resources.exceptions;
+
+import java.io.Serializable;
+import java.time.Instant;
+
+public class StandartError implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    private Instant timestamp;
+    private Integer status;
+    private String error;
+    private String path;
+    private String message;
+
+<span class="fc" id="L15">    public StandartError() {</span>
+        // TODO Auto-generated constructor stub
+<span class="fc" id="L17">    }</span>
+
+    public Instant getTimestamp() {
+<span class="fc" id="L20">        return timestamp;</span>
+    }
+
+    public void setTimestamp(Instant timestamp) {
+<span class="fc" id="L24">        this.timestamp = timestamp;</span>
+<span class="fc" id="L25">    }</span>
+
+    public Integer getStatus() {
+<span class="fc" id="L28">        return status;</span>
+    }
+
+    public void setStatus(Integer status) {
+<span class="fc" id="L32">        this.status = status;</span>
+<span class="fc" id="L33">    }</span>
+
+    public String getError() {
+<span class="fc" id="L36">        return error;</span>
+    }
+
+    public void setError(String error) {
+<span class="fc" id="L40">        this.error = error;</span>
+<span class="fc" id="L41">    }</span>
+
+    public String getPath() {
+<span class="fc" id="L44">        return path;</span>
+    }
+
+    public void setPath(String path) {
+<span class="fc" id="L48">        this.path = path;</span>
+<span class="fc" id="L49">    }</span>
+
+    public String getMessage() {
+<span class="fc" id="L52">        return message;</span>
+    }
+
+    public void setMessage(String message) {
+<span class="fc" id="L56">        this.message = message;</span>
+<span class="fc" id="L57">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

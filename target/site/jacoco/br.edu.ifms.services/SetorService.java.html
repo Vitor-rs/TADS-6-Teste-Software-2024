@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SetorService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TADS-6-Teste-Software</a> &gt; <a href="index.source.html" class="el_package">br.edu.ifms.services</a> &gt; <span class="el_source">SetorService.java</span></div><h1>SetorService.java</h1><pre class="source lang-java linenums">package br.edu.ifms.services;
+
+import br.edu.ifms.dto.SetorDTO;
+import br.edu.ifms.entities.Setor;
+import br.edu.ifms.repositories.SetorRepository;
+import br.edu.ifms.services.exceptions.DataBaseException;
+import br.edu.ifms.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+/**
+ * Classe de serviço para gerenciar entidades Setor.
+ */
+@Service
+<span class="fc" id="L25">public class SetorService {</span>
+
+    @Autowired
+    private SetorRepository repository;
+
+    /**
+     * Recupera todas as entidades Setor e as converte para SetorDTO.
+     *
+     * @return uma lista de SetorDTO
+     */
+    @Transactional(readOnly = true)
+    public List&lt;SetorDTO&gt; findAll() {
+<span class="nc" id="L37">        List&lt;Setor&gt; list = repository.findAll();</span>
+<span class="nc" id="L38">        return list.stream().map(SetorDTO::new).collect(Collectors.toList());</span>
+    }
+
+    /**
+     * Recupera uma lista paginada de entidades Setor e as converte para SetorDTO.
+     *
+     * @param pageable as informações de paginação
+     * @return uma lista paginada de SetorDTO
+     */
+    @Transactional(readOnly = true)
+    public Page&lt;SetorDTO&gt; findAllPaged(Pageable pageable) {
+<span class="fc" id="L49">        Page&lt;Setor&gt; list = repository.findAll(pageable);</span>
+<span class="fc" id="L50">        return list.map(SetorDTO::new);</span>
+    }
+
+    /**
+     * Recupera uma entidade Setor pelo seu ID e a converte para SetorDTO.
+     *
+     * @param id o ID da entidade Setor
+     * @return o SetorDTO
+     * @throws ResourceNotFoundException se a entidade não for encontrada
+     */
+    @Transactional(readOnly = true)
+    public SetorDTO findById(Long id) {
+<span class="fc" id="L62">        Optional&lt;Setor&gt; obj = repository.findById(id);</span>
+<span class="fc" id="L63">        Setor entity = obj.orElseThrow(() -&gt; new ResourceNotFoundException(</span>
+                &quot;A entidade consultada não foi localizada&quot;));
+<span class="fc" id="L65">        return new SetorDTO(entity);</span>
+    }
+
+    /**
+     * Insere uma nova entidade Setor com base no SetorDTO fornecido.
+     *
+     * @param dto o SetorDTO contendo os dados para inserir
+     * @return o SetorDTO inserido
+     */
+    @Transactional
+    public SetorDTO insert(SetorDTO dto) {
+<span class="fc" id="L76">        Setor entity = new Setor();</span>
+<span class="fc" id="L77">        return getSetorDTO(dto, entity);</span>
+    }
+
+    /**
+     * Método auxiliar para definir as propriedades de uma entidade Setor a partir de um SetorDTO e salvá-la.
+     *
+     * @param dto    o SetorDTO contendo os dados
+     * @param entity a entidade Setor a ser atualizada
+     * @return o SetorDTO atualizado
+     */
+    private SetorDTO getSetorDTO(SetorDTO dto, Setor entity) {
+<span class="fc" id="L88">        entity.setSigla(dto.getSigla());</span>
+<span class="fc" id="L89">        entity.setNome(dto.getNome());</span>
+<span class="fc" id="L90">        entity.setEmail(dto.getEmail());</span>
+<span class="fc" id="L91">        entity.setTelefone(dto.getTelefone());</span>
+<span class="fc" id="L92">        entity.setCoordenador(dto.getCoordenador());</span>
+<span class="fc" id="L93">        entity = repository.save(entity);</span>
+<span class="fc" id="L94">        return new SetorDTO(entity);</span>
+    }
+
+    /**
+     * Atualiza uma entidade Setor existente com base no SetorDTO fornecido.
+     *
+     * @param id  o ID da entidade Setor a ser atualizada
+     * @param dto o SetorDTO contendo os dados para atualizar
+     * @return o SetorDTO atualizado
+     * @throws ResourceNotFoundException se a entidade não for encontrada
+     */
+    @Transactional
+    public SetorDTO update(Long id, SetorDTO dto) {
+        try {
+<span class="fc" id="L108">            Setor entity = repository.getReferenceById(id);</span>
+<span class="fc" id="L109">            return getSetorDTO(dto, entity);</span>
+<span class="fc" id="L110">        } catch (EntityNotFoundException e) {</span>
+<span class="fc" id="L111">            throw new ResourceNotFoundException(&quot;O recurso com o ID = &quot; + id + &quot; não foi localizado&quot;);</span>
+        }
+    }
+
+    /**
+     * Exclui uma entidade Setor pelo seu ID.
+     *
+     * @param id o ID da entidade Setor a ser excluída
+     * @throws ResourceNotFoundException se a entidade não for encontrada
+     * @throws DataBaseException         se a entidade não puder ser excluída devido a violação de integridade de dados
+     */
+    public void delete(Long id) {
+        try {
+<span class="fc" id="L124">            repository.deleteById(id);</span>
+<span class="fc" id="L125">        } catch (EmptyResultDataAccessException e) {</span>
+<span class="fc" id="L126">            throw new ResourceNotFoundException(&quot;O recurso com o ID = &quot; + id + &quot;não foi localizado&quot;);</span>
+<span class="fc" id="L127">        } catch (DataIntegrityViolationException e) {</span>
+<span class="fc" id="L128">            throw new DataBaseException(&quot;Não é possível excluir o registro, pois o mesmo está em uso&quot;);</span>
+<span class="fc" id="L129">        }</span>
+<span class="fc" id="L130">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
