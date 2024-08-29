@@ -21,24 +21,23 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * Classe de testes para o recurso TecnicoResource.
- *
+ * <p>
  * Esta classe contém testes unitários que verificam o comportamento da classe
  * TecnicoResource, que é responsável por gerenciar as operações relacionadas
  * aos técnicos. Os testes são realizados utilizando o MockMvc para simular
  * requisições HTTP e verificar as respostas da API.
- *
+ * <p>
  * Os testes incluem:
  * - Atualização de técnicos
  * - Busca de técnicos por ID
  * - Listagem paginada de técnicos
- *
+ * <p>
  * Os testes utilizam mocks do serviço TecnicoService para isolar a lógica
  * de controle da lógica de serviço, permitindo verificar se as respostas
  * da API estão corretas.
@@ -65,7 +64,7 @@ public class TecnicoResourceTests {
 
     /**
      * Configuração inicial dos testes.
-     *
+     * <p>
      * Este método é executado antes de cada teste, configurando os dados
      * necessários e as respostas esperadas do serviço mockado.
      *
@@ -98,7 +97,7 @@ public class TecnicoResourceTests {
 
     /**
      * Testa a atualização de um técnico existente.
-     *
+     * <p>
      * Este teste verifica se a atualização de um técnico com um ID existente
      * retorna um status 200 OK e se o corpo da resposta contém os dados
      * do técnico atualizado.
@@ -119,7 +118,7 @@ public class TecnicoResourceTests {
 
     /**
      * Testa a atualização de um técnico com um ID inexistente.
-     *
+     * <p>
      * Este teste verifica se a tentativa de atualização de um técnico com
      * um ID que não existe retorna um status 404 Not Found.
      *
@@ -135,9 +134,24 @@ public class TecnicoResourceTests {
         result.andExpect(status().isNotFound());
     }
 
+    // Exercício
+    //insert deveria retornar um "created" (código 201) e um TecnicoDTO
+    @Test
+    public void insertDeveriaRetornarCreatedETecnicoDTO() throws Exception {
+        String jsonBody = objectMapper.writeValueAsString(tecnicoDTO);
+        ResultActions result = mockMvc.perform(post("/tecnicos")
+                .content(jsonBody)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON));
+        result.andExpect(status().isCreated());
+        result.andExpect(jsonPath("$.id").exists());
+        result.andExpect(jsonPath("$.nome").exists());
+    }
+
+
     /**
      * Testa a listagem paginada de técnicos.
-     *
+     * <p>
      * Este teste verifica se a requisição para listar todos os técnicos
      * retorna um status 200 OK.
      *
@@ -153,7 +167,7 @@ public class TecnicoResourceTests {
 
     /**
      * Testa a busca de um técnico por ID existente.
-     *
+     * <p>
      * Este teste verifica se a busca de um técnico com um ID existente
      * retorna um status 200 OK e se o corpo da resposta contém os dados
      * do técnico.
@@ -169,7 +183,7 @@ public class TecnicoResourceTests {
 
     /**
      * Testa a busca de um técnico por ID inexistente.
-     *
+     * <p>
      * Este teste verifica se a busca de um técnico com um ID que não existe
      * retorna um status 404 Not Found.
      *
