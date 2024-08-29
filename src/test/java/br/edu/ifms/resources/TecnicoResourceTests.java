@@ -148,6 +148,25 @@ public class TecnicoResourceTests {
         result.andExpect(jsonPath("$.nome").exists());
     }
 
+    /*
+    * delete deveria retornar um "no content" (código 204) quando o ID existir
+    * */
+    @Test
+    public void deleteDeveriaRetornarNoContentQuandoIdExistir() throws Exception {
+        ResultActions result = mockMvc.perform(delete("/tecnicos/{id}", idExistente)
+                .accept(MediaType.APPLICATION_JSON));
+        result.andExpect(status().isNoContent());
+    }
+
+    /*
+    * delete deveria retornar um "not found" (código 404) quando o ID não existir
+    * */
+    @Test
+    public void deleteDeveriaRetornarNotFoundQuandoIdNaoExistir() throws Exception {
+        ResultActions result = mockMvc.perform(delete("/tecnicos/{id}", idInexistente)
+                .accept(MediaType.APPLICATION_JSON));
+        result.andExpect(status().isNotFound());
+    }
 
     /**
      * Testa a listagem paginada de técnicos.
